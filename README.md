@@ -60,4 +60,52 @@ Se quiser colocar um diferencial de peso no seu portfólio, tente implementar um
 ---
 **Boa sorte, e lembrem-se: Arquitetura consiste em manter as opções abertas!** 
 
+## Como Executar o Projeto
+
+### Pré-requisitos
+- Java 11
+- Maven 3.6+
+
+### Executar a Aplicação
+```bash
+mvn spring-boot:run
+```
+
+A aplicação estará disponível em `http://localhost:8080`.
+
+### Executar os Testes
+```bash
+mvn test
+```
+
+### API Endpoint
+- **POST** `/produtos`
+  - Corpo da requisição:
+    ```json
+    {
+      "nome": "Produto Exemplo",
+      "preco": 150.0,
+      "estoque": 60
+    }
+    ```
+  - Resposta de sucesso:
+    ```json
+    {
+      "mensagem": "Produto cadastrado com sucesso!",
+      "nome": "Produto Exemplo",
+      "estoque": 60,
+      "preco": 150.0,
+      "precoFinal": 135.0
+    }
+    ```
+
+### Regras de Negócio
+- Produtos com nome contendo "premium" devem custar pelo menos R$ 100,00.
+- Produtos com estoque >= 50 recebem 10% de desconto.
+
+### Troubleshooting
+- **Erro de compilação**: Verifique se todas as dependências estão corretas no `pom.xml`.
+- **Testes falhando**: Execute `mvn clean test` para limpar e reexecutar.
+- **Banco de dados**: O H2 está configurado em memória. Acesse o console em `http://localhost:8080/h2-console` com JDBC URL `jdbc:h2:mem:arq_software`.
+
 *Prof. Martins*
